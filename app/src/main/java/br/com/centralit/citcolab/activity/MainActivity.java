@@ -25,5 +25,6 @@ public class MainActivity extends AppCompatActivity {
         txt_locale = findViewById(R.id.txt_locale);
         txt_office = findViewById(R.id.txt_office);
         userImageView = findViewById(R.id.userPhoto);
+        userImageView.setImageResource(R.drawable.profilesample);
     }
 }
