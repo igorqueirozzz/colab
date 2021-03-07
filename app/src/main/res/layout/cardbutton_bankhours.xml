@@ -8,6 +8,7 @@
     app:cardCornerRadius="20dp"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     android:clickable="true"
+    android:onClick="openBankHour"
     app:cardBackgroundColor="@color/colorPrimary">
 
     <RelativeLayout
