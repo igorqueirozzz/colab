@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     public void openBankHour(View view){
         startActivity(new Intent(MainActivity.this, BankHourActivity.class));
     }
+    public void openFinaces(View view){
+        startActivity(new Intent(MainActivity.this, FinanceActivity.class));
+    }
 
     public User buildUser(){
         return new User("5314",

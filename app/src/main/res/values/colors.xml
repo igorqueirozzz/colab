@@ -10,4 +10,6 @@
     <color name="colorPrimaryDark">#00848c</color>
     <color name="colorAccent">#5ee7ee</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="light_green">#77FF00</color>
 </resources>

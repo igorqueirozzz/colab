@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.BankHourActivity">
+    tools:context=".activity.FinanceActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -30,39 +29,25 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
                     android:textAlignment="center"
-                    android:text="CIT PONTO"
+                    android:text="CENTRAL IT"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:paddingTop="8dp"></TextView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:paddingTop="30dp"
-                    android:text="Saldo banco de horas"/>
-
-                <TextView
-                    android:id="@+id/txt_bankHourValue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/holo_green_light"
-                    android:textStyle="bold"
-                    android:textSize="26sp"
-                    android:text="+09:30"
-                    android:layout_marginTop="10dp"/>
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo_cit"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
                     android:textAlignment="center"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="30dp"
-                    android:textSize="12sp"
-                    android:textColor="@android:color/darker_gray"
-                    android:text="Dados para simples conferênica, sujeitos a homologação"/>
-
+                    android:text="Consulte seus recibos de pagamentos"
+                    android:textSize="16dp"
+                    android:paddingBottom="20dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -85,17 +70,18 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/registerPointRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/point_registers_layout" />
+            android:layout_marginTop="15dp">
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
