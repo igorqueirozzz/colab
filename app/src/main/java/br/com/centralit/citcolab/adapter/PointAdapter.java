@@ -1,6 +1,5 @@
 package br.com.centralit.citcolab.adapter;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.centralit.citcolab.R;
-import br.com.centralit.citcolab.model.Ponto;
+import br.com.centralit.citcolab.model.PointRegisters;
 
 public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> {
 
-    public List<Ponto> listItems = new ArrayList<>();
+    public List<PointRegisters> listItems = new ArrayList<>();
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -44,10 +43,10 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Ponto ponto = listItems.get(position);
-        holder.date.setText(ponto.getDate());
-        holder.local.setText(ponto.getLocal());
-        holder.time.setText(ponto.getHora());
+        PointRegisters pointRegisters = listItems.get(position);
+        holder.date.setText(pointRegisters.getDate());
+        holder.local.setText(pointRegisters.getLocal());
+        holder.time.setText(pointRegisters.getHora());
 
     }
 
@@ -58,7 +57,7 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> 
 
 
 
-    public PointAdapter(List<Ponto> pontos){
-        listItems = pontos;
+    public PointAdapter(List<PointRegisters> pointRegisters){
+        listItems = pointRegisters;
     };
 }

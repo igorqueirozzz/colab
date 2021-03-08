@@ -1,10 +1,10 @@
 package br.com.centralit.citcolab.model;
 
-public class Ponto {
+public class PointRegisters {
 
     private String date, local, hora;
 
-    public Ponto(String date, String local, String hora) {
+    public PointRegisters(String date, String local, String hora) {
         this.date = date;
         this.local = local;
         this.hora = hora;
