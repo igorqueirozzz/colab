@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -80,5 +81,9 @@ public class BankHourActivity extends AppCompatActivity {
         pointRegisters.add(new PointRegisters("04/03/2021", "MCTI - Esplanada dos Ministerios", "13:00"));
         pointRegisters.add(new PointRegisters("04/03/2021", "MCTI - Esplanada dos Ministerios", "20:00"));
 
+    }
+
+    public void finishActivity(View view){
+        finish();
     }
 }
