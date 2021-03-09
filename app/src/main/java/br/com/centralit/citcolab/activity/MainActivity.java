@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import br.com.centralit.citcolab.R;
+import br.com.centralit.citcolab.helper.Base64Custom;
 import br.com.centralit.citcolab.model.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 

@@ -2,17 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.centralit.citcolab">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_logo_cit"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CITColab">
-        <activity android:name=".activity.FinanceActivity"></activity>
-        <activity android:name=".activity.BankHourActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MainActivity" />
+        android:theme="@style/Theme.CITColab"
+        android:screenOrientation="portrait"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.FinanceActivity"/>
+        <activity android:name=".activity.BankHourActivity"/>
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
