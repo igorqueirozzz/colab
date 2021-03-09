@@ -79,17 +79,51 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:id="@+id/registerPointRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="15dp">
 
+            <com.github.barteksc.pdfviewer.PDFView
+                android:id="@+id/pdfViewer"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:gravity="center"/>
 
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:checkedButton="@id/select_normal_button"
+                app:singleSelection="true"
+                android:layout_below="@id/pdfViewer"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/select_normal_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:text="Normal"/>
 
+                <Button
+                    android:id="@+id/select_complement_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:text="Complementar"/>
 
+                <Button
+                    android:id="@+id/select_vacation_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:text="Férias"/>
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
