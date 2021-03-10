@@ -7,7 +7,7 @@ public class User {
     private String password;
     private String office;
     private String localOffice;
-    private String photoProfileURI;
+    private String photoProfileURL;
 
     public User(String employerID, String name, String email, String password, String office, String localOffice, String photoProfileURI) {
         this.employerID = employerID;
@@ -16,7 +16,7 @@ public class User {
         this.password = password;
         this.office = office;
         this.localOffice = localOffice;
-        this.photoProfileURI = photoProfileURI;
+        this.photoProfileURL = photoProfileURI;
     }
 
     public String getEmployerID() {
@@ -68,11 +68,11 @@ public class User {
         this.localOffice = localOffice;
     }
 
-    public String getPhotoProfileURI() {
-        return photoProfileURI;
+    public String getPhotoProfileURL() {
+        return photoProfileURL;
     }
 
-    public void setPhotoProfileURI(String photoProfileURI) {
-        this.photoProfileURI = photoProfileURI;
+    public void setPhotoProfileURI(String photoProfileURL) {
+        this.photoProfileURL = photoProfileURL;
     }
 }

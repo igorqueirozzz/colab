@@ -68,7 +68,7 @@
             android:background="@drawable/second_layer">
 
             <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                android:id="@+id/monthChangeListPointRegisters"
+                android:id="@+id/monthChangePaycheck"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
@@ -85,11 +85,23 @@
             android:layout_height="match_parent"
             android:layout_marginTop="15dp">
 
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/pdfProgressIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:foregroundGravity="center"
+                app:showAnimationBehavior="outward"/>
+
             <com.github.barteksc.pdfviewer.PDFView
                 android:id="@+id/pdfViewer"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:gravity="center"/>
+                android:gravity="center">
+
+
+            </com.github.barteksc.pdfviewer.PDFView>
 
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/toggleButton"

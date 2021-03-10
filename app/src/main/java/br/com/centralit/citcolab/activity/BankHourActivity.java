@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,6 +16,8 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.centralit.citcolab.R;
@@ -36,18 +39,9 @@ public class BankHourActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank_hour);
-        this.pontos();
-
-        //Adaptadores e gerenciadores de compontentes de interface gráfica
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        PointAdapter pointAdapter = new PointAdapter(pointRegisters);
 
         //Referencias dos componentes da interface gráfica
         registerPointRecyclerView = findViewById(R.id.registerPointRecyclerView);
-        registerPointRecyclerView.setLayoutManager(layoutManager);
-        registerPointRecyclerView.setHasFixedSize(true);
-        registerPointRecyclerView.setAdapter(pointAdapter);
-        registerPointRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
 
         monthChangeListPointRegisters = findViewById(R.id.monthChangeListPointRegisters);
         monthChangeListPointRegisters.setTitleMonths(months);
@@ -58,9 +52,31 @@ public class BankHourActivity extends AppCompatActivity {
                 .commit();
 
         bankHourText = findViewById(R.id.txt_bankHourValue);
-        
 
+        new MyAsyncTask().execute();
 
+    }
+
+    class MyAsyncTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //Adaptadores e gerenciadores de compontentes de interface gráfica
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+            PointAdapter pointAdapter = new PointAdapter(pointRegisters);
+            registerPointRecyclerView.setLayoutManager(layoutManager);
+            registerPointRecyclerView.setHasFixedSize(true);
+            registerPointRecyclerView.setAdapter(pointAdapter);
+            registerPointRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            pontos();
+            Collections.reverse(pointRegisters);
+            return null;
+        }
     }
 
     public void pontos(){
