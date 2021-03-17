@@ -18,8 +18,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.com.centralit.citcolab.R;
-import br.com.centralit.citcolab.helper.Base64Custom;
 import br.com.centralit.citcolab.model.User;
+import br.com.centralit.citcolab.repository.UserRepository;
+import br.com.centralit.citcolab.services.UserService;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,12 +33,13 @@ public class MainActivity extends AppCompatActivity {
     private CircleImageView userImageView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        User user = buildUser();
+        User user = new User();
 
         txt_user = findViewById(R.id.txt_user);
         txt_locale = findViewById(R.id.txt_locale);
@@ -45,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         userImageView = findViewById(R.id.userPhoto);
        // userImageView.setImageResource(R.drawable.profilesample);
 
-        txt_user.setText(user.getName());
-        txt_locale.setText(user.getLocalOffice());
-        txt_office.setText(user.getOffice());
+        txt_user.setText(user.getUser_name());
+        txt_locale.setText(user.getOffice_local());
+        txt_office.setText(user.getUser_occupation());
 
         new MyAsyncTask().execute(user.getPhotoProfileURL());
 
@@ -60,15 +62,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, FinanceActivity.class));
     }
 
-    public User buildUser(){
-        return new User("5314",
-                "Igor Queiroz",
-                "igor.santos@centralit.com.br",
-                "senha@demo",
-                "Android Developer",
-                "MCTI - Esplanada dos Ministérios",
-                "https://media-exp1.licdn.com/dms/image/C4E03AQHX-oz_s5uMgA/profile-displayphoto-shrink_800_800/0/1614857183154?e=1620864000&v=beta&t=PkV_SDZsEl2oIzjdBeL47Nl6M0GmcyLkZQHhzhCxu_o");
-    }
+//    public User buildUser(){
+//        return new User("5314",
+//                "Igor Queiroz",
+//                "igor.santos@centralit.com.br",
+//                "senha@demo",
+//                "Android Developer",
+//                "MCTI - Esplanada dos Ministérios",
+//                "https://media-exp1.licdn.com/dms/image/C4E03AQHX-oz_s5uMgA/profile-displayphoto-shrink_800_800/0/1614857183154?e=1620864000&v=beta&t=PkV_SDZsEl2oIzjdBeL47Nl6M0GmcyLkZQHhzhCxu_o");
+//    }
 
     class MyAsyncTask extends AsyncTask<String, Void, Bitmap>{
         @Override

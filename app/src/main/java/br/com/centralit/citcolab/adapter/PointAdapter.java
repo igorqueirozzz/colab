@@ -44,9 +44,9 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PointRegisters pointRegisters = listItems.get(position);
-        holder.date.setText(pointRegisters.getDate());
-        holder.local.setText(pointRegisters.getLocal());
-        holder.time.setText(pointRegisters.getHora());
+//        holder.date.setText(pointRegisters.getDate());
+//        holder.local.setText(pointRegisters.getLocal());
+//        holder.time.setText(pointRegisters.getHora());
 
     }
 

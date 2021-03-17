@@ -1,36 +1,34 @@
 package br.com.centralit.citcolab.model;
 
+import java.util.Calendar;
+
 public class PointRegisters {
 
-    private String date, local, hora;
+    private Integer id;
+    private Calendar registerDate;
+    private User user;
 
-    public PointRegisters(String date, String local, String hora) {
-        this.date = date;
-        this.local = local;
-        this.hora = hora;
+    public Integer getId() {
+        return id;
     }
 
-    public String getDate() {
-        return date;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getLocal() {
-        return local;
+    public Calendar getRegisterDate() {
+        return registerDate;
     }
 
-    public String getHora() {
-        return hora;
+    public void setRegisterDate(Calendar registerDate) {
+        this.registerDate = registerDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public User getUser() {
+        return user;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
