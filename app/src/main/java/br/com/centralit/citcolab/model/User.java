@@ -1,8 +1,10 @@
 package br.com.centralit.citcolab.model;
 
+import java.util.Calendar;
+
 public class User {
     private Integer id;
-    private String employer_id;
+    private Integer employer_id;
     private String user_name;
     private String user_cpf;
     private String user_email;
@@ -10,11 +12,12 @@ public class User {
     private String user_occupation;
     private String office_local;
     private String photoProfileURL;
+    private String bankHours;
 
     public User() {
     }
 
-    public User(Integer id, String employer_id, String user_name, String user_cpf, String user_email, String user_password, String user_occupation, String office_local, String photoProfileURL) {
+    public User(Integer id, Integer employer_id, String user_name, String user_cpf, String user_email, String user_password, String user_occupation, String office_local, String photoProfileURL) {
         this.id = id;
         this.employer_id = employer_id;
         this.user_name = user_name;
@@ -34,11 +37,11 @@ public class User {
         this.id = id;
     }
 
-    public String getEmployer_id() {
+    public Integer getEmployer_id() {
         return employer_id;
     }
 
-    public void setEmployer_id(String employer_id) {
+    public void setEmployer_id(Integer employer_id) {
         this.employer_id = employer_id;
     }
 
@@ -96,5 +99,13 @@ public class User {
 
     public void setPhotoProfileURL(String photoProfileURL) {
         this.photoProfileURL = photoProfileURL;
+    }
+
+    public String getBankHours() {
+        return bankHours;
+    }
+
+    public void setBankHours(String bankHours) {
+        this.bankHours = bankHours;
     }
 }

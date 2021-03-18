@@ -8,6 +8,10 @@ public class PointRegisters {
     private Calendar registerDate;
     private User user;
 
+
+    public PointRegisters() {
+    }
+
     public Integer getId() {
         return id;
     }

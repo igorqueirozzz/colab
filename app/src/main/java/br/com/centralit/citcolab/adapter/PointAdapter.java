@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,8 @@ import br.com.centralit.citcolab.model.PointRegisters;
 public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> {
 
     public List<PointRegisters> listItems = new ArrayList<>();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -44,9 +47,11 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PointRegisters pointRegisters = listItems.get(position);
-//        holder.date.setText(pointRegisters.getDate());
-//        holder.local.setText(pointRegisters.getLocal());
-//        holder.time.setText(pointRegisters.getHora());
+        String date = dateFormat.format(pointRegisters.getRegisterDate());
+        String hour = hourFormat.format(pointRegisters.getRegisterDate());
+        holder.date.setText(date);
+        holder.local.setText(pointRegisters.getUser().getOffice_local());
+        holder.time.setText(hour);
 
     }
 
