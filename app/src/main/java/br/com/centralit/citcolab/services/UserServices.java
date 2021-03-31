@@ -3,14 +3,17 @@ package br.com.centralit.citcolab.services;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.centralit.citcolab.dto.UserCredentials;
 import br.com.centralit.citcolab.model.User;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface UserServices {
 
-    @GET("/api/users/{id}")
-    Call<User> getUser(@Path("id") Integer id);
+    @POST("/api/users/auth")
+    Call<User> getUser(@Body UserCredentials userCredentials);
 
 }

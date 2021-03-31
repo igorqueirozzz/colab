@@ -7,7 +7,7 @@ public class RetrofitServices {
 
     public static Retrofit getRetrofitService(){
 
-        String API = "http://192.168.0.102:8080";
+        String API = "http://10.100.0.77:8080";
         return new Retrofit
                 .Builder()
                 .baseUrl(API)

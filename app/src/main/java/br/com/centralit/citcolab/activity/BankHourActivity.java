@@ -74,14 +74,6 @@ public class BankHourActivity extends AppCompatActivity {
                 .commit();
 
         bankHourText = findViewById(R.id.txt_bankHourValue);
-        user.setUser_name("Igor Queiroz");
-        user.setEmployer_id(5304);
-        user.setUser_email("igorqueirozz@outlook.com");
-        user.setUser_cpf("06870602140");
-        user.setUser_occupation("Java Developer");
-        user.setOffice_local("MCTI - Esplanada dos Ministérios");
-        user.setUser_password("************");
-
 
 
     }

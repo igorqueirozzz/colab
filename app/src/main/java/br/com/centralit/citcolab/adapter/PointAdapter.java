@@ -50,7 +50,7 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> 
         String date = dateFormat.format(pointRegisters.getRegisterDate());
         String hour = hourFormat.format(pointRegisters.getRegisterDate());
         holder.date.setText(date);
-        holder.local.setText(pointRegisters.getUser().getOffice_local());
+        holder.local.setText(pointRegisters.getUser().getLocal_office());
         holder.time.setText(hour);
 
     }
