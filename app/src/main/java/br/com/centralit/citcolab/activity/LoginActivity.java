@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         userCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.code() == 200){
+                if(response.isSuccessful()){
                     User.setCurrentUser(response.body());
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
@@ -77,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
+                Toast.makeText(LoginActivity.this, "Falha no login verifique sua senha ou tente novamente mais tarde ", Toast.LENGTH_LONG).show();
+                loadButtonEntrar.buttonFinished();
             }
         });
 

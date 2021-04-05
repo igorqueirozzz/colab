@@ -18,15 +18,15 @@ public class User {
     private Long id;
     private Long employerId;
     private String cpf;
-    private String userName;
+    private String user_name;
     private GenderEnum gender;
     private String email;
-    private String userPassword;
+    private String user_password;
     private String occupation;
     private String local_office;
     private SectorEnum sector;
-    private AccessLevel accessLevel;
-    private String photo_profile_url;
+    private AccessLevel access_level;
+    private String photo_profile;
 
     public static User currentUser;
 

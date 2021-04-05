@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.centralit.citcolab.R;
-import br.com.centralit.citcolab.model.PointRegisters;
+import br.com.centralit.citcolab.model.PointRegister;
 
 public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> {
 
-    public List<PointRegisters> listItems = new ArrayList<>();
+    public List<PointRegister> listItems = new ArrayList<>();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
 
@@ -46,11 +46,11 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PointRegisters pointRegisters = listItems.get(position);
-        String date = dateFormat.format(pointRegisters.getRegisterDate());
-        String hour = hourFormat.format(pointRegisters.getRegisterDate());
+        PointRegister pointRegisters = listItems.get(position);
+        String date = dateFormat.format(pointRegisters.getRegister_date());
+        String hour = hourFormat.format(pointRegisters.getRegister_date());
         holder.date.setText(date);
-        holder.local.setText(pointRegisters.getUser().getLocal_office());
+        holder.local.setText(pointRegisters.getUser_id().getLocal_office());
         holder.time.setText(hour);
 
     }
@@ -62,7 +62,7 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> 
 
 
 
-    public PointAdapter(List<PointRegisters> pointRegisters){
+    public PointAdapter(List<PointRegister> pointRegisters){
         listItems = pointRegisters;
     };
 }

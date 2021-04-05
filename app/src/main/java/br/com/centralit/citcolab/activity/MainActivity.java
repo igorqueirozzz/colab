@@ -50,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
         userImageView = findViewById(R.id.userPhoto);
        // userImageView.setImageResource(R.drawable.profilesample);
 
-        setUser(user);
 
-        if(user.getPhoto_profile_url() != null){
-            getPhoto task = new getPhoto();
-            task.execute(user.getPhoto_profile_url());
-        }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        user = User.getCurrentUser();
+    }
 
     public void openBankHour(View view){
         startActivity(new Intent(MainActivity.this, BankHourActivity.class));
@@ -67,37 +67,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setUser(User user){
-        txt_user.setText(user.getUserName());
-        txt_locale.setText(user.getLocal_office());
-        txt_office.setText(user.getOccupation());
-    }
+//    public void setUser(User user){
+//        txt_user.setText(user.getUser_name());
+//        txt_locale.setText(user.getLocal_office());
+//        txt_office.setText(user.getOccupation());
+//    }
 
-    class getPhoto extends AsyncTask<String, Void, Bitmap>{
-
-        String urlPhoto;
-
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            userImageView.setImageBitmap(bitmap);
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            urlPhoto = strings[0];
-            Bitmap bitmap = null;
-            try {
-                InputStream inputStream = new URL(urlPhoto).openStream();
-                bitmap = BitmapFactory.decodeStream(inputStream);
-            }catch (Exception e){
-                e.printStackTrace();
-                Log.i("INFO", "FALHA" + e.getMessage());
-            }
-            return bitmap;
-        }
-    }
 
 
 }
