@@ -13,6 +13,6 @@ import retrofit2.http.Path;
 
 public interface PointRegisterServices {
 
-    @POST("/api/users/register-point/")
+    @POST("/api/point-controller/register")
     Call<RegisterDTO> registerNewPoint(@Body RegisterDTO pointRegister);
 }

@@ -1,20 +1,28 @@
 package br.com.centralit.citcolab.activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,23 +104,24 @@ public class BankHourActivity extends AppCompatActivity {
     }
 
     private void registerPoint(){
-
         Date date = new Date();
+        String dateFormatedForJson = DateHelper.formatForJson(date);
         RegisterDTO register;
         register = RegisterDTO.builder()
-                .register_date(date)
-                .register_time(date)
+                .register_date(dateFormatedForJson)
+                .register_time(dateFormatedForJson)
                 .reference(DateHelper.getRef(date))
                 .user(user)
                 .user_id(user.getId())
                 .user_location(user.getLocal_office())
                 .build();
+        
         pointRegisterServices = RetrofitServices.getRetrofitService().create(PointRegisterServices.class);
         Call<RegisterDTO> registerDTOCall = pointRegisterServices.registerNewPoint(register);
         registerDTOCall.enqueue(new Callback<RegisterDTO>() {
             @Override
             public void onResponse(Call<RegisterDTO> call, Response<RegisterDTO> response) {
-                Toast.makeText(BankHourActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BankHourActivity.this, " Teste Resposta " + response.message(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
