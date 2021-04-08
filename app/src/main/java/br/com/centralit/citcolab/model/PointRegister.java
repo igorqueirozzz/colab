@@ -16,9 +16,9 @@ public class PointRegister {
 
     private Long id;
     private Date register_date;
-    private Date register_time;
     private String register_local;
-    private User user_id;
+    private Date register_time;
     private String reference;
+    private User user_id;
 
 }

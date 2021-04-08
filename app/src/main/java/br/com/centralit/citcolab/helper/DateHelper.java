@@ -16,7 +16,7 @@ import java.util.TimeZone;
 public class DateHelper {
 
     public static String getRef(Date date){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("M/yyyy");
         return new String(dateFormat.format(date));
     }
 

@@ -24,7 +24,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private User currentUser;
+    public static  User currentUser;
     private UserServices userServices;
 
     //Atributos da interface grafica
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void getUser(){
+    public void getUser(){
          String email = userLogin.getText().toString();
          String password = userPassWord.getText().toString();
          userCredentials = new UserCredentials(email, password);
