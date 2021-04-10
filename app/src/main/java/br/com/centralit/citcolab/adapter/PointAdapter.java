@@ -14,6 +14,7 @@ import java.util.List;
 
 import br.com.centralit.citcolab.R;
 import br.com.centralit.citcolab.model.PointRegister;
+import br.com.centralit.citcolab.model.User;
 
 public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> {
 
@@ -47,11 +48,10 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PointRegister pointRegisters = listItems.get(position);
-        String date = dateFormat.format(pointRegisters.getRegister_date());
-        String hour = hourFormat.format(pointRegisters.getRegister_date());
-        holder.date.setText(date);
-        holder.local.setText(pointRegisters.getUser_id().getLocal_office());
-        holder.time.setText(hour);
+
+        holder.date.setText(pointRegisters.getRegister_date());
+        holder.local.setText(pointRegisters.getRegister_local());
+        holder.time.setText(pointRegisters.getRegister_time());
 
     }
 

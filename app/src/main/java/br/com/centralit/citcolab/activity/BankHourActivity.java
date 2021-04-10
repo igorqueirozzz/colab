@@ -1,16 +1,6 @@
 package br.com.centralit.citcolab.activity;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,16 +8,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParser;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,11 +52,13 @@ public class BankHourActivity extends AppCompatActivity {
 
     private static PointRegisterServices pointRegisterServices;
     private CharSequence[] months = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+    private String monthReference;
     User user = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank_hour);
+        monthReference = DateHelper.getRef(new Date());
         user = User.getCurrentUser();
         /*TODO
          *Recuperar dados do usuário e seus registros de ponto.
@@ -86,35 +83,63 @@ public class BankHourActivity extends AppCompatActivity {
         monthChangeListPointRegisters.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-               String monthSelected = (date.getMonth() + 1) + "/" + date.getYear();
+                pointRegisters.clear();
+                pointAdapter.notifyDataSetChanged();
+                String monthSelected = (date.getMonth() + 1) + "/" + date.getYear();
                 getPointList(monthSelected);
             }
         });
 
         bankHourText = findViewById(R.id.txt_bankHourValue);
 
+        getPointList(monthReference);
 
     }
 
     public void getPointList(String months){
-        GetRegisterMonthListDTO reference = GetRegisterMonthListDTO.builder()
-                .userId(1L)
-                .reference(months)
-                .build();
+        pointRegisters.clear();
+        pointAdapter.notifyDataSetChanged();
+        GetRegisterMonthListDTO reference = new GetRegisterMonthListDTO();
+        reference.setUserId(2L);
+        reference.setReference(months);
         pointRegisterServices = RetrofitServices.getRetrofitService().create(PointRegisterServices.class);
-        Call<List<PointRegister>> registersCall = pointRegisterServices.getRegistersByMonth(reference);
-        registersCall.enqueue(new Callback<List<PointRegister>>() {
+
+        Call<ArrayList> registersCall = pointRegisterServices.getRegistersByMonth(reference);
+
+        registersCall.enqueue(new Callback<ArrayList>() {
             @Override
-            public void onResponse(Call<List<PointRegister>> call, Response<List<PointRegister>> response) {
-                pointRegisters = response.body();
-                pointAdapter.notifyDataSetChanged();
-                Toast.makeText(BankHourActivity.this, " "+response.code(), Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<ArrayList> call, Response<ArrayList> response) {
+                JSONArray jsonArray = new JSONArray(response.body());
+                try {
+                    for (int index = 0; index < jsonArray.length(); index++){
+                        JSONObject object = jsonArray.getJSONObject(index);
+                        Long pointID = object.getLong("id");
+                        String pointLocal = object.getString("register_local");
+                        Long pointDate = object.getLong("register_date");
+                        String pointTime = object.getString("register_time");
+                        String pointReference = object.getString("reference");
+                        Long userID = object.getLong("user_id");
+                        Date date = new Date(pointDate);
+                        PointRegister pointRegister = new PointRegister();
+                        pointRegister.setId(pointID);
+                        pointRegister.setRegister_local(pointLocal);
+                        pointRegister.setRegister_date(DateHelper.formatSimple(date));
+                        pointRegister.setRegister_time(pointTime);
+                        pointRegister.setReference(pointReference);
+                        pointRegister.setUser_id(userID);
+                        pointRegisters.add(pointRegister);
+                        pointAdapter.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    Log.i("ERRO 1", e.getMessage());
+                    e.printStackTrace();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<PointRegister>> call, Throwable t) {
-                Log.i("ERRO DO CARALHO", t.getMessage());
-                Toast.makeText(BankHourActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ArrayList> call, Throwable t) {
+                Log.i("ERRO 2", t.getMessage());
+                t.printStackTrace();
             }
         });
     }
@@ -140,54 +165,39 @@ public class BankHourActivity extends AppCompatActivity {
     }
 
     private void registerPoint(){
-        user = User.getCurrentUser();
         Date date = new Date();
-        String dateFormatedForJson = DateHelper.formatForJson(date);
-        RegisterDTO register;
-        register = RegisterDTO.builder()
-                .register_date(dateFormatedForJson)
-                .register_time(dateFormatedForJson)
-                .reference(DateHelper.getRef(date))
-                .userEntity(user)
-                .user_id(user.getId())
-                .user_location(user.getLocal_office())
-                .build();
+        String dateFormatedForJson = DateHelper.formatForDataBase(date);
+        RegisterDTO register = new RegisterDTO();
+        register.setReference(DateHelper.getRef(date));
+        register.setRegister_date(dateFormatedForJson);
+        register.setRegister_time(dateFormatedForJson);
+        register.setUser_id(user.getId());
+        register.setUser_location(user.getLocal_office());
+        register.setUserEntity(user);
 
 
         
         pointRegisterServices = RetrofitServices.getRetrofitService().create(PointRegisterServices.class);
-        Call<String> teste = pointRegisterServices.getTest();
-        teste.enqueue(new Callback<String>() {
+
+        Call<Void> registerDTOCall = pointRegisterServices.registerNewPoint(register);
+        registerDTOCall.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(BankHourActivity.this, "Codigo: "
-                        + response.code() +
-                        "Corpo: " + response.body() +
-                        "Menssagem: " + response.message(), Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200){
+                    Toast.makeText(BankHourActivity.this, "Ponto registrado com sucesso", Toast.LENGTH_SHORT).show();
+                    getPointList(DateHelper.getRef(date));
+                    pointAdapter.notifyDataSetChanged();
+
+                } else if(response.code() == 400){
+                    Toast.makeText(BankHourActivity.this, "Falha ao registrar o ponto", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
 
             }
         });
-//        Call<RegisterDTO> registerDTOCall = pointRegisterServices.registerNewPoint(register);
-//        registerDTOCall.enqueue(new Callback<RegisterDTO>() {
-//            @Override
-//            public void onResponse(Call<RegisterDTO> call, Response<RegisterDTO> response) {
-//                if(response.code() == 200){
-//                    Toast.makeText(BankHourActivity.this, "Ponto registrado com sucesso", Toast.LENGTH_SHORT).show();
-//                } else if(response.code() == 400){
-//                    Toast.makeText(BankHourActivity.this, "Falha ao registrar o ponto", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<RegisterDTO> call, Throwable t) {
-//                Toast.makeText(BankHourActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//                Log.i("ERRO DO CARAI", t.getMessage());
-//            }
-//        });
     }
 
     public void finishActivity(View view){

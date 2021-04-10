@@ -23,10 +23,7 @@ import br.com.centralit.citcolab.model.User;
 import br.com.centralit.citcolab.services.RetrofitServices;
 import br.com.centralit.citcolab.services.UserServices;
 import de.hdodenhof.circleimageview.CircleImageView;
-import lombok.SneakyThrows;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 
 public class MainActivity extends AppCompatActivity {
     /*

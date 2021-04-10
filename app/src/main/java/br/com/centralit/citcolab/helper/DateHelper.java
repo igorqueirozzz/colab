@@ -21,11 +21,16 @@ public class DateHelper {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String formatForJson(Date date) {
+    public static String formatForDataBase(Date date) {
         ZoneId zoneId = ZoneId.systemDefault();
         TimeZone timeZone = TimeZone.getTimeZone(zoneId);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
         simpleDateFormat.setTimeZone(timeZone);
+        return new String(simpleDateFormat.format(date));
+    }
+
+    public static String formatSimple(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return new String(simpleDateFormat.format(date));
     }
 }
