@@ -21,15 +21,6 @@ public class User {
     private AccessLevel access_level;
     private String photo_profile;
 
-    public static User currentUser;
-
-    public static User getCurrentUser() {
-        return currentUser;
-    }
-
-    public static void setCurrentUser(User currentUser) {
-        User.currentUser = currentUser;
-    }
 
     public User(){}
 

@@ -2,29 +2,43 @@ package br.com.centralit.citcolab.activity;
 
 
 import android.content.Intent;
-import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Map;
+
 import br.com.centralit.citcolab.R;
+import br.com.centralit.citcolab.api.APIError;
 import br.com.centralit.citcolab.dto.UserCredentials;
 import br.com.centralit.citcolab.helper.LoadButtonLogin;
-import br.com.centralit.citcolab.model.User;
+import br.com.centralit.citcolab.helper.CurrentUserBuilder;
+import br.com.centralit.citcolab.model.CurrentUser;
 import br.com.centralit.citcolab.services.RetrofitServices;
 import br.com.centralit.citcolab.services.UserServices;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Converter;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static  User currentUser;
     private UserServices userServices;
+    private Retrofit retrofitServices = RetrofitServices.getRetrofitService();
+    public static CurrentUser currentUser;
 
     //Atributos da interface grafica
     private EditText userLogin;
@@ -59,24 +73,37 @@ public class LoginActivity extends AppCompatActivity {
          userCredentials = new UserCredentials(email, password);
 
 
-        userServices = RetrofitServices.getRetrofitService().create(UserServices.class);
-        Call<User> userCall = userServices.getUser(userCredentials);
-        userCall.enqueue(new Callback<User>() {
+        userServices = retrofitServices.create(UserServices.class);
+        Call<ArrayList> userCall = userServices.getUser(userCredentials);
+        userCall.enqueue(new Callback<ArrayList>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
-                    User.setCurrentUser(response.body());
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Falha no login verifique sua senha ou tente novamente mais tarde " + response.code(), Toast.LENGTH_LONG).show();
-                    loadButtonEntrar.buttonFinished();
+            public void onResponse(Call<ArrayList> call, Response<ArrayList> response) {
+                if (response.code() == 200){
+                    try {
+                        currentUser = CurrentUserBuilder.build(response.body());
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+                    } catch (JSONException e) {
+                        Log.i("ERRO 200 ", e.getMessage());
+                        e.printStackTrace();
+                    }
+                } else if(response.code() == 400){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                        String error = jsonObject.getString("errors").replace("[\"]\"", "");
+                        Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
+                        loadButtonEntrar.buttonFinished();
+                    } catch (JSONException | IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Falha no login verifique sua senha ou tente novamente mais tarde ", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<ArrayList> call, Throwable t) {
+                if(t.getMessage().startsWith("Failed to connect to")){
+                    Toast.makeText(LoginActivity.this, "Falha ao conectar ao servidor, verifique sua conexão", Toast.LENGTH_SHORT).show();
+                }
                 loadButtonEntrar.buttonFinished();
             }
         });

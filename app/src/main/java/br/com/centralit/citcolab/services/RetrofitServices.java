@@ -14,7 +14,7 @@ public class RetrofitServices {
                 .setLenient()
                 .create();
 
-        String API = "http://192.168.0.103:8080";
+        String API = "http://10.100.0.77:8080";
         return new Retrofit
                 .Builder()
                 .baseUrl(API)

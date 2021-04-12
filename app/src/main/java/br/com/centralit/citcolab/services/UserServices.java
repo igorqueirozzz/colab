@@ -1,5 +1,9 @@
 package br.com.centralit.citcolab.services;
 
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,6 @@ import retrofit2.http.Path;
 public interface UserServices {
 
     @POST("/api/users/auth")
-    Call<User> getUser(@Body UserCredentials userCredentials);
+    Call<ArrayList> getUser(@Body UserCredentials userCredentials);
 
 }
