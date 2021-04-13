@@ -7,8 +7,12 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
 
 import br.com.centralit.citcolab.R;
 
@@ -16,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
 
     Animation animation;
     ImageView logo;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +28,16 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        animation = AnimationUtils.loadAnimation(this, R.anim.logo_anim);
-        logo = findViewById(R.id.img_logo);
+//        animation = AnimationUtils.loadAnimation(this, R.anim.logo_anim);
+          logo = findViewById(R.id.img_logo);
+          progressBar = findViewById(R.id.spinkitview);
+        Sprite doubleBounce = new DoubleBounce();
+        progressBar.setIndeterminateDrawable(doubleBounce);
 
-        animation.setDuration(900);
-        animation.setRepeatCount(Animation.INFINITE);
-        animation.setRepeatMode(Animation.REVERSE);
-        logo.startAnimation(animation);
+//        animation.setDuration(900);
+//        animation.setRepeatCount(Animation.INFINITE);
+//        animation.setRepeatMode(Animation.REVERSE);
+//        logo.startAnimation(animation);
 
         new Handler().postDelayed(new Runnable() {
             @Override

@@ -6,16 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".activity.SplashActivity">
 
-    <ImageView
-        android:id="@+id/imageBackGround"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/teste" />
 
     <ImageView
         android:id="@+id/img_logo"
@@ -25,7 +21,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spinkitview"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        style="@style/SpinKitView.CubeGrid"
+        app:SpinKit_Color="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gifImageView"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

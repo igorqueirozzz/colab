@@ -3,6 +3,7 @@
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf460a6867ac1194c10d8982fc5dcc1b/jetified-material-calendarview-1.6.0/annotations.zip!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ff98670f3dcbf1f8adde921bf805954/jetified-material-calendarview-1.6.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9db153a408761d31a62a80b26a1b3056/jetified-material-calendarview-1.6.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf460a6867ac1194c10d8982fc5dcc1b/jetified-material-calendarview-1.6.0/res" />
@@ -11,6 +12,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ff98670f3dcbf1f8adde921bf805954/jetified-material-calendarview-1.6.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ff98670f3dcbf1f8adde921bf805954/jetified-material-calendarview-1.6.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ff98670f3dcbf1f8adde921bf805954/jetified-material-calendarview-1.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9db153a408761d31a62a80b26a1b3056/jetified-material-calendarview-1.6.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9db153a408761d31a62a80b26a1b3056/jetified-material-calendarview-1.6.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9db153a408761d31a62a80b26a1b3056/jetified-material-calendarview-1.6.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
