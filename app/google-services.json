@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "635878703472",
+    "project_id": "cit-colab",
+    "storage_bucket": "cit-colab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635878703472:android:4e4ea06a3e37775a948fb5",
+        "android_client_info": {
+          "package_name": "br.com.centralit.citcolab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635878703472-sohsvt7qhtc6sg39o4o1tu1q0phgfbq2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.centralit.citcolab",
+            "certificate_hash": "1a58727ed3b07709d9f538f1974e65cc707ba82e"
+          }
+        },
+        {
+          "client_id": "635878703472-ebkjdoma48hasn1ufu521b393r7bbrnb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT4BEgqqiLiYOg3_uY1E36OsvK3sk0UqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635878703472-ebkjdoma48hasn1ufu521b393r7bbrnb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

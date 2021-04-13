@@ -6,68 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+
+
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#303030"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/first_layer"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/userPhoto"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_person"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/ic_person" />
+
                 <TextView
                     android:id="@+id/txt_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Carregando..."
                     android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:text="Carregando..."/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txt_locale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="normal"
-                    android:textColor="@android:color/darker_gray"
-                    android:text="..."
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginTop="5dp"/>
+                    android:text="..."
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center"
-            android:background="@drawable/second_layer">
+            android:background="@drawable/second_layer"
+            android:gravity="center">
+
             <TextView
                 android:id="@+id/txt_office"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="22sp"
-                android:textAlignment="center"
-                android:paddingTop="10dp"
-                android:text="..."
                 android:ellipsize="marquee"
+                android:paddingTop="10dp"
                 android:singleLine="true"
+                android:text="..."
+                android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textStyle="bold"/>
+                android:textSize="22sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,8 +107,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.13"
-                app:layout_constraintVertical_chainStyle="packed"
-                />
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <include
                 android:id="@+id/include"
@@ -144,5 +150,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/configApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="openConfig"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spinkitviewMain"
+        style="@style/SpinKitView.CubeGrid"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01999998" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
