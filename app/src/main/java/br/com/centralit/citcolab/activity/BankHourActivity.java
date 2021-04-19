@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -133,6 +134,8 @@ public class BankHourActivity extends AppCompatActivity {
                             pointRegister.setReference(pointReference);
                             pointRegister.setUser_id(userID);
                             pointRegisters.add(pointRegister);
+                            Collections.reverse(pointRegisters
+                            );
                             pointAdapter.notifyDataSetChanged();
                             linearProgressIndicator.setVisibility(View.INVISIBLE);
                         }

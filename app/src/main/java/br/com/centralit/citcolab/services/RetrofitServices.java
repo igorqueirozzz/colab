@@ -15,9 +15,10 @@ public class RetrofitServices {
                 .create();
 
         String API = "http://10.100.0.77:8080";
+        String API2 = "http://192.168.0.100:8080";
         return new Retrofit
                 .Builder()
-                .baseUrl(API)
+                .baseUrl(API2)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
