@@ -14,8 +14,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -47,11 +54,12 @@ public class LoginActivity extends AppCompatActivity {
     private LoadButtonLogin loadButtonEntrar;
     private UserCredentials userCredentials;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        
         // Referencias de elementos de interface grafica.
         userLogin = findViewById(R.id.txt_editLogin);
         userPassWord = findViewById(R.id.txt_editpassword);
