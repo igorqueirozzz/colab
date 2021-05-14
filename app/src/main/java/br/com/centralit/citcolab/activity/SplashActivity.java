@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 //        animation = AnimationUtils.loadAnimation(this, R.anim.logo_anim);
-          logo = findViewById(R.id.img_logo);
+//          logo = findViewById(R.id.img_logo);
           progressBar = findViewById(R.id.spinkitview);
         Sprite cubeGrid = new CubeGrid();
         progressBar.setIndeterminateDrawable(cubeGrid);

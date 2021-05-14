@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
                     android:layout_gravity="center_horizontal"
-                    android:text="CIT PONTO"
+                    android:text="Registros de ponto"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
 

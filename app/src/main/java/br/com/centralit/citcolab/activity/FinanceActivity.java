@@ -1,16 +1,28 @@
 package br.com.centralit.citcolab.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.net.UrlQuerySanitizer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.github.ybq.android.spinkit.SpinKitView;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.CubeGrid;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
@@ -26,17 +38,18 @@ import java.util.Date;
 import javax.net.ssl.HttpsURLConnection;
 
 import br.com.centralit.citcolab.R;
+import br.com.centralit.citcolab.model.CurrentUser;
 
 public class FinanceActivity extends AppCompatActivity {
 
-    String pdfurl = "http://www.africau.edu/images/default/sample.pdf";
-    String pdfurl2 = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-    String pdfurl3 = "http://www.pdf995.com/samples/pdf.pdf";
     private CharSequence[] months = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     private PDFView pdfView;
     private MaterialCalendarView monthChangePaycheck;
     private LinearProgressIndicator linearProgressIndicator;
+    private ProgressBar spinKitView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +57,34 @@ public class FinanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finance);
 
         pdfView = findViewById(R.id.pdfViewer);
-        linearProgressIndicator = findViewById(R.id.pdfProgressIndicator);
-        new getPdfPaycheck().execute(pdfurl3);
+        spinKitView = findViewById(R.id.spinFinance);
+        Sprite cubeGrid = new CubeGrid();
+        spinKitView.setIndeterminateDrawable(cubeGrid);
+        loading();
+       // new getPdfPaycheck().execute();
 
         monthChangePaycheck = findViewById(R.id.monthChangePaycheck);
         monthChangePaycheck.setTitleMonths(months);
         monthChangePaycheck.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
+                loading();
                 String mesAno = String.valueOf((date.getMonth() + 1) + "" + date.getYear());
                 Log.i("TESTE", "TESTE: " + mesAno );
-                if(mesAno.equals("12021")){
-                    new getPdfPaycheck().execute(pdfurl);
-                } else if (mesAno.equals("22021")){
-                    new getPdfPaycheck().execute(pdfurl2);
-                }
-                else if (mesAno.equals("32021")){
-                    new getPdfPaycheck().execute(pdfurl3);
-                }
+                 String url;
+               storageReference.child("docs")
+                       .child("payment")
+                       .child(String.valueOf(CurrentUser.getEmployerId()))
+                       .child(mesAno)
+                       .child("payment.pdf")
+                        .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                   @Override
+                   public void onSuccess(Uri uri) {
+                       new getPdfPaycheck().execute(uri.toString());
+                   }
+               });
+
+
             }
         });
 
@@ -79,8 +102,7 @@ public class FinanceActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            linearProgressIndicator.setVisibility(View.VISIBLE);
-            pdfView.setVisibility(View.INVISIBLE);
+            loading();
         }
 
         @Override
@@ -104,19 +126,31 @@ public class FinanceActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+            loading();
         }
 
         @Override
         protected void onPostExecute(InputStream inputStream) {
             super.onPostExecute(inputStream);
-            linearProgressIndicator.setVisibility(View.INVISIBLE);
             pdfView.fromStream(inputStream).load();
-            pdfView.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loaded();
+                }
+            },2000);
         }
 
+    }
 
+    public void loading(){
+        pdfView.setVisibility(View.INVISIBLE);
+        spinKitView.setVisibility(View.VISIBLE);
+    }
 
-
+    public void loaded(){
+        pdfView.setVisibility(View.VISIBLE);
+        spinKitView.setVisibility(View.INVISIBLE);
     }
 
 
