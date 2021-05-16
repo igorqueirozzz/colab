@@ -86,13 +86,10 @@ public class ConfigActivity extends AppCompatActivity {
         txt_newPassword = findViewById(R.id.txt_newPassword);
         txt_newPasswordConfirm = findViewById(R.id.txt_newPasswordConfirm);
         saveButton = findViewById(R.id.update_user_button);
+        Glide.with(this).load(CurrentUser.getPhoto_profile()).into(circleImageView);
 
-    }
+        Log.i("ONCREATE============", CurrentUser.getPhoto_profile());
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Glide.with(getApplicationContext()).load(CurrentUser.getPhoto_profile()).into(circleImageView);
     }
 
     @Override
@@ -102,7 +99,6 @@ public class ConfigActivity extends AppCompatActivity {
             try {
                 Uri uri = data.getData();
                 image = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                circleImageView.setImageBitmap(image);
                 updateUser();
             } catch (Exception e){
                 loaded();
@@ -112,6 +108,7 @@ public class ConfigActivity extends AppCompatActivity {
 
     public void finish(View view) {
         super.finish();
+        finish();
     }
 
     @Override
@@ -146,6 +143,7 @@ public class ConfigActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Uri> task) {
                         String photoUrl = task.getResult().toString();
                         updateUserPhoto(photoUrl);
+                        Glide.with(ConfigActivity.this).load(photoUrl).into(circleImageView);
 
                     }
                 });
@@ -162,13 +160,18 @@ public class ConfigActivity extends AppCompatActivity {
         userCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("IGOR2", "CODE: " + response.body());
+                Log.i("ERRO 1", "CODE: " + response.body());
+                CurrentUser.setPhoto_profile(photoUrl);
+                Log.i("ONSET============", CurrentUser.getPhoto_profile());
+                Glide.with(ConfigActivity.this).load(photoUrl).into(circleImageView);
                 loaded();
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Log.i("IGOR", "CODE: " + t.getMessage());
+                CurrentUser.setPhoto_profile(photoUrl);
+                Glide.with(ConfigActivity.this).load(photoUrl).into(circleImageView);
                 loaded();
             }
         });

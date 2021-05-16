@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#303030"
+        android:background="@color/background"
         android:orientation="vertical">
 
         <LinearLayout
@@ -34,6 +34,7 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:tint="@color/colorPrimary"
                     android:src="@drawable/ic_person" />
 
                 <TextView
@@ -41,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Carregando..."
+                    android:textColor="@android:color/darker_gray"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -81,71 +83,141 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="66dp"
-                android:layout_marginEnd="66dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/logo_cit" />
 
-            <include
-                android:id="@+id/include2"
-                layout="@layout/cardbutton_bankhours"
-                android:layout_width="347dp"
-                android:layout_height="55dp"
-                android:layout_marginStart="32dp"
+            <Button
+                android:id="@+id/button_bank_hour"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/include"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="openBankHour"
+                android:text="Registro de ponto"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:icon="@drawable/ic_bankhour"
+                app:iconGravity="top"
+                app:iconPadding="0dp"
+                app:iconSize="48dp"
+                app:layout_constraintEnd_toStartOf="@+id/button_finance"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.13"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:rippleColor="@color/white" />
 
-            <include
-                android:id="@+id/include"
-                layout="@layout/cardbutton_finance"
-                android:layout_width="347dp"
-                android:layout_height="55dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/include3"
+            <Button
+                android:id="@+id/button_request"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Solicitações"
+                android:textAlignment="center"
+                android:textSize="10sp"
+                app:elevation="18dp"
+                app:icon="@drawable/ic_person"
+                app:iconGravity="top"
+                app:iconPadding="0dp"
+                app:iconSize="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include2" />
+                app:layout_constraintStart_toEndOf="@+id/button_finance"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="@color/white" />
 
-            <include
-                android:id="@+id/include3"
-                layout="@layout/cardbutton_request"
-                android:layout_width="347dp"
-                android:layout_height="55dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/include4"
+            <Button
+                android:id="@+id/button_bithday"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="openFinances"
+                android:text="Aniversariantes"
+                android:textAlignment="center"
+                android:textSize="11sp"
+                app:elevation="18dp"
+                app:icon="@drawable/ic_bithday"
+                app:iconGravity="top"
+                app:iconPadding="0dp"
+                app:iconSize="48dp"
+                app:layout_constraintEnd_toStartOf="@+id/button_info"
+                app:layout_constraintStart_toEndOf="@+id/button_benefits"
+                app:layout_constraintTop_toBottomOf="@+id/button_finance" />
+
+            <Button
+                android:id="@+id/button_benefits"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:onClick="openFinances"
+                android:text="Benefícios"
+                android:textAlignment="center"
+                android:textSize="11sp"
+                app:elevation="18dp"
+                app:icon="@drawable/ic_benefits"
+                app:iconGravity="top"
+                app:iconPadding="0dp"
+                app:iconSize="48dp"
+                app:layout_constraintEnd_toStartOf="@+id/button_bithday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_bank_hour" />
+
+            <Button
+                android:id="@+id/button_info"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="Comunicados"
+                android:textAlignment="center"
+                android:textSize="9sp"
+                app:elevation="18dp"
+                app:icon="@drawable/ic_info"
+                app:iconGravity="top"
+                app:iconPadding="0dp"
+                app:iconSize="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include" />
+                app:layout_constraintStart_toEndOf="@+id/button_bithday"
+                app:layout_constraintTop_toBottomOf="@+id/button_request"
+                app:rippleColor="@color/white" />
 
-            <include
-                android:id="@+id/include4"
-                layout="@layout/cardbutton_infoaccess"
-                android:layout_width="347dp"
-                android:layout_height="55dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
+            <Button
+                android:id="@+id/button_finance"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:onClick="openFinances"
+                android:text="Financeiro"
+                android:textAlignment="center"
+                android:textSize="11sp"
+                app:elevation="18dp"
+                app:icon="@drawable/ic_money"
+                app:iconGravity="top"
+                app:iconPadding="0dp"
+                app:iconSize="48dp"
+                app:layout_constraintEnd_toStartOf="@+id/button_request"
+                app:layout_constraintStart_toEndOf="@+id/button_bank_hour"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include3" />
+                app:srcCompat="@drawable/logo_dark" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -160,13 +232,15 @@
         android:onClick="openConfig"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_settings" />
+        app:srcCompat="@drawable/ic_settings"
+        app:tint="@android:color/darker_gray" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spinkitviewMain"
         style="@style/SpinKitView.CubeGrid"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        app:SpinKit_Color="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

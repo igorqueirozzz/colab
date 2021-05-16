@@ -65,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         setUser();
+        Glide.with(this).load(CurrentUser.getPhoto_profile()).into(userImageView);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Glide.with(MainActivity.this).load(CurrentUser.getPhoto_profile()).into(userImageView);
     }
 
     public void openBankHour(View view){
@@ -82,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         txt_user.setText(CurrentUser.getUser_name());
         txt_locale.setText(CurrentUser.getLocal_office());
         txt_office.setText(CurrentUser.getOccupation());
-        Glide.with(MainActivity.this).load(CurrentUser.getPhoto_profile()).into(userImageView);
         userImageView.setVisibility(View.VISIBLE);
         spinKitView.setVisibility(View.INVISIBLE);
 

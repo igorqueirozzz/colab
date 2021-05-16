@@ -38,6 +38,7 @@ import java.util.Date;
 import javax.net.ssl.HttpsURLConnection;
 
 import br.com.centralit.citcolab.R;
+import br.com.centralit.citcolab.helper.DateHelper;
 import br.com.centralit.citcolab.model.CurrentUser;
 
 public class FinanceActivity extends AppCompatActivity {
@@ -61,17 +62,21 @@ public class FinanceActivity extends AppCompatActivity {
         Sprite cubeGrid = new CubeGrid();
         spinKitView.setIndeterminateDrawable(cubeGrid);
         loading();
-       // new getPdfPaycheck().execute();
+        getCurrentPaycheck();
 
         monthChangePaycheck = findViewById(R.id.monthChangePaycheck);
         monthChangePaycheck.setTitleMonths(months);
+        monthChangePaycheck
+                .state()
+                .edit()
+                .setMaximumDate(CalendarDay.today())
+                .commit();
         monthChangePaycheck.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
                 loading();
                 String mesAno = String.valueOf((date.getMonth() + 1) + "" + date.getYear());
-                Log.i("TESTE", "TESTE: " + mesAno );
-                 String url;
+
                storageReference.child("docs")
                        .child("payment")
                        .child(String.valueOf(CurrentUser.getEmployerId()))
@@ -81,6 +86,16 @@ public class FinanceActivity extends AppCompatActivity {
                    @Override
                    public void onSuccess(Uri uri) {
                        new getPdfPaycheck().execute(uri.toString());
+                   }
+               }).addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       if(e.getMessage().contains("not found")){
+                           Toast.makeText(FinanceActivity.this, "Não há registros para o mês selecionado", Toast.LENGTH_SHORT).show();
+                       }
+                       Toast.makeText(FinanceActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                       loaded();
+                       pdfView.setVisibility(View.INVISIBLE);
                    }
                });
 
@@ -138,7 +153,7 @@ public class FinanceActivity extends AppCompatActivity {
                 public void run() {
                     loaded();
                 }
-            },2000);
+            },1000);
         }
 
     }
@@ -151,6 +166,31 @@ public class FinanceActivity extends AppCompatActivity {
     public void loaded(){
         pdfView.setVisibility(View.VISIBLE);
         spinKitView.setVisibility(View.INVISIBLE);
+    }
+
+    public void getCurrentPaycheck(){
+        String date = DateHelper.getRefStorage(new Date());
+        storageReference.child("docs")
+                .child("payment")
+                .child(String.valueOf(CurrentUser.getEmployerId()))
+                .child(date)
+                .child("payment.pdf")
+                .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                new getPdfPaycheck().execute(uri.toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(e.getMessage().contains("not found")){
+                    Toast.makeText(FinanceActivity.this, "Não há registros para o mês selecionado", Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(FinanceActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                loaded();
+                pdfView.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
 

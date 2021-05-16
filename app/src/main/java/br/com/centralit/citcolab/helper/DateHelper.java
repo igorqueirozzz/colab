@@ -20,6 +20,12 @@ public class DateHelper {
         return new String(dateFormat.format(date));
     }
 
+    public static String getRefStorage(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("M/yyyy");
+        return new String(dateFormat.format(date)).replace("/", "");
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String formatForDataBase(Date date) {
         ZoneId zoneId = ZoneId.systemDefault();

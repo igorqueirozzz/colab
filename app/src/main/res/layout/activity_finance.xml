@@ -10,7 +10,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#303030"
+        android:background="@color/background"
         android:orientation="vertical">
 
         <LinearLayout
@@ -33,14 +33,15 @@
                     android:layout_marginTop="10dp"
                     android:clickable="true"
                     android:onClick="finishActivity"
-                    android:src="@drawable/ic_arrow_back" />
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@android:color/darker_gray" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="FINANCEIRO"
                     android:textAlignment="center"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/darker_gray"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -48,15 +49,16 @@
                     android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_money" />
+                    android:src="@drawable/ic_money"
+                    app:tint="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="20dp"
+                    android:textColor="@android:color/darker_gray"
                     android:text="Consulte seus recibos de pagamentos"
                     android:textAlignment="center"
-                    android:textColor="@android:color/white"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -93,8 +95,6 @@
                 android:layout_height="350dp"
                 android:gravity="center"
                 android:visibility="invisible">
-
-
             </com.github.barteksc.pdfviewer.PDFView>
 
             <com.google.android.material.button.MaterialButtonToggleGroup
@@ -112,6 +112,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
                     android:text="Normal" />
 
                 <Button
@@ -119,12 +120,14 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
                     android:text="Complementar" />
 
                 <Button
                     android:id="@+id/select_vacation_button"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="Férias" />
             </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -137,6 +140,7 @@
         android:id="@+id/spinFinance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:SpinKit_Color="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"

@@ -9,7 +9,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="5dp">
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,6 +21,8 @@
                 android:id="@+id/txt_date_register_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16dp"
                 android:text="10/08/2021"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="10dp" />
@@ -30,14 +33,18 @@
                 android:layout_toEndOf="@id/txt_date_register_point"
                 android:layout_alignBaseline="@id/txt_date_register_point"
                 android:layout_marginStart="10dp"
+                android:textSize="16dp"
                 android:textColor="@color/colorPrimary"
                 android:text="09:00"/>
 
             <TextView
+                android:id="@+id/txt_enterprise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Central IT"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16dp"
+                android:text="Colab"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="5dp"/>
 
@@ -56,6 +63,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/img_local"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16dp"
                 android:layout_below="@id/txt_date_register_point"
                 android:layout_marginTop="5dp"
                 android:text="MCTI"/>
