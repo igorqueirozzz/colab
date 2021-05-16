@@ -3,6 +3,7 @@ package br.com.centralit.citcolab.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.net.UrlQuerySanitizer;
 import android.os.AsyncTask;
@@ -108,7 +109,7 @@ public class FinanceActivity extends AppCompatActivity {
 
     }
 
-    public void finishActivity(View view) {
+    public void finishActivity(View view){
         finish();
     }
 
@@ -148,12 +149,17 @@ public class FinanceActivity extends AppCompatActivity {
         protected void onPostExecute(InputStream inputStream) {
             super.onPostExecute(inputStream);
             pdfView.fromStream(inputStream).load();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    loaded();
-                }
-            },1000);
+            if (isFinishing()){
+
+            } else {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loaded();
+                    }
+                },1000);
+            }
+
         }
 
     }
