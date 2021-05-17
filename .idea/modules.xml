@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CIT_Colab.iml" filepath="$PROJECT_DIR$/.idea/modules/CIT_Colab.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CIT_Colab.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CIT_Colab.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Colab.iml" filepath="$PROJECT_DIR$/.idea/modules/Colab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Colab.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Colab.app.iml" />
     </modules>
   </component>
 </project>

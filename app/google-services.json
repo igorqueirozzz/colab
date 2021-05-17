@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:635878703472:android:4e4ea06a3e37775a948fb5",
+        "mobilesdk_app_id": "1:635878703472:android:fcb47d3e572908b8948fb5",
         "android_client_info": {
-          "package_name": "br.com.centralit.citcolab"
+          "package_name": "br.com.app.colab"
         }
       },
       "oauth_client": [
         {
-          "client_id": "635878703472-sohsvt7qhtc6sg39o4o1tu1q0phgfbq2.apps.googleusercontent.com",
+          "client_id": "635878703472-b8nrm3905cru9e0i9ct8lsg47uoh3ulj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "br.com.centralit.citcolab",
+            "package_name": "br.com.app.colab",
             "certificate_hash": "1a58727ed3b07709d9f538f1974e65cc707ba82e"
           }
         },
